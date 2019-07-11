@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" version="3.2.0" method="upgrade">
+
+    <name>MOD_TOC</name>
+    <author>Andy Kirk</author>
+    <authorEmail>andy.kirk@npeu.ox.ac.uk</authorEmail>
+    <authorUrl>https://www.npeu.ox.ac.uk</authorUrl>
+    <creationDate>July 2019</creationDate>
+    <copyright>(C) NPEU 2019</copyright>
+    <license>MIT License; see LICENSE.md</license>
+
+    <!--  The version string is recorded in the components table -->
+    <version>1.0.0</version>
+    <!-- The description is optional and defaults to the name -->
+    <description>MOD_TOC_XML_DESCRIPTION</description>
+
+    <updateservers>
+        <!-- Note: No spaces or linebreaks allowed between the server tags -->
+        <server type="extension" name="NPEU: mod_toc Update Site">https://raw.githubusercontent.com/NPEU/mod_toc/master/update-manifest.xml</server>
+    </updateservers>
+
+    <files>
+        <filename module="mod_toc">mod_toc.php</filename>
+        <filename>helper.php</filename>
+        <filename>index.html</filename>
+        <folder>language</folder>
+        <folder>tmpl</folder>
+    </files>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                    name="heading_level"
+                    type="list"
+                    label="MOD_TOC_HEADING_LEVEL_LABEL"
+                    description="MOD_TOC_HEADING_LEVEL_DESC"
+                    default="h2"
+                    required="true"
+                >
+                    <option value="h1">h1</option>
+                    <option value="h2">h2</option>
+                    <option value="h3">h3</option>
+                    <option value="h4">h4</option>
+                    <option value="h5">h5</option>
+                    <option value="h6">h6</option>
+                </field>
+                <field
+                    name="min_heading_count"
+                    type="number"
+                    label="MOD_TOC_MIN_HEADING_COUNT_LABEL"
+                    description="MOD_TOC_MIN_HEADING_COUNT_DESC"
+                    default="3"
+                    required="true"
+                />
+            </fieldset>
+        </fields>
+    </config>
+
+</extension>
