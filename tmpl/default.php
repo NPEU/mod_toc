@@ -8,7 +8,6 @@
  */
 
 defined('_JEXEC') or die;
-JLoader::register('TplNPEU6Helper', dirname(dirname(dirname(__DIR__))) . '/helper.php');
 
 $hx          = $params->get('header_tag', 'h2');
 $min_h_count = (int) $params->get('min_heading_count', '3');
@@ -24,28 +23,25 @@ if (count($matches) < $min_h_count) {
     return;
 }
 ?>
-<div class="c-panel  c-panel--very-light  t-neutral  u-space--above  u-space--above">
-    <nav class="c-panel--module" aria-label="table of contents">
-        <div class="n-section-menu">
-            <?php if ($module->showtitle): ?>
-            <<?php echo $hx; ?>><?php echo $module->title; ?></<?php echo $hx; ?>>
-            <?php endif; ?>
-            <ul class="n-section-menu__list">
-                <?php foreach ($matches as $match): ?>
-                <?php preg_match('#id="[^"]+"#', $match[0], $id_match);
-                if(!isset($id_match[0])) {
-                    $h2_id = TplNPEU6Helper::html_id($match[1]);
-                    $new_h2 = str_replace('<h2', '<h2 id="' . $h2_id . '"', $match[0]);
-                    
-                    $doc->article->text      = str_replace($match[0], $new_h2, $doc->article->text);
-                    $doc->article->fulltext  = str_replace($match[0], $new_h2, $doc->article->fulltext);
-                    $doc->article->introtext = str_replace($match[0], $new_h2, $doc->article->introtext);
-                } else {
-                    $h2_id = $id_match[0];
-                } ?>
-                <li class="n-section-menu__item"><a href="#<?php echo $h2_id; ?>" class="n-section-menu__link"><?php echo $match[1]; ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    </nav>
-</div>
+<nav aria-label="table of contents">
+        <?php if ($module->showtitle): ?>
+        <<?php echo $hx; ?>><?php echo $module->title; ?></<?php echo $hx; ?>>
+        <?php endif; ?>
+        <ul>
+            <?php foreach ($matches as $match): ?>
+            <?php preg_match('#id="[^"]+"#', $match[0], $id_match);
+            if(!isset($id_match[0])) {
+                $h2_id = JApplicationHelper::stringURLSafe($match[1]);
+                $new_h2 = str_replace('<h2', '<h2 id="' . $h2_id . '"', $match[0]);
+                
+                $doc->article->text      = str_replace($match[0], $new_h2, $doc->article->text);
+                $doc->article->fulltext  = str_replace($match[0], $new_h2, $doc->article->fulltext);
+                $doc->article->introtext = str_replace($match[0], $new_h2, $doc->article->introtext);
+            } else {
+                $h2_id = $id_match[0];
+            } ?>
+            <li><a href="#<?php echo $h2_id; ?>"><?php echo $match[1]; ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</nav>
