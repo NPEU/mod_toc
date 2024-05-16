@@ -3,18 +3,21 @@
  * @package     Joomla.Site
  * @subpackage  mod_toc
  *
- * @copyright   Copyright (C) NPEU 2019.
+ * @copyright   Copyright (C) NPEU 2024.
  * @license     MIT License; see LICENSE.md
  */
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
+use Joomla\CMS\Filter\OutputFilter;
+
 $hx          = $params->get('header_tag', 'h2');
 $min_h_count = (int) $params->get('min_heading_count', '3');
-$doc         = JFactory::getDocument();
+$doc         = Factory::getDocument();
 
 $min_h_count = 3;
-    
+
 // ToC requires id's on headers, so add them if not already present.
 // Note this is a back-up, ideally the editor will create them so they're saved into the article.
 preg_match_all('#<h2[^>]*>([^<]+)</h2>#', $doc->article->text, $matches, PREG_SET_ORDER);
@@ -31,9 +34,9 @@ if (count($matches) < $min_h_count) {
             <?php foreach ($matches as $match): ?>
             <?php preg_match('#id="([^"]+)"#', $match[0], $id_match);
             if(!isset($id_match[0])) {
-                $h2_id = JApplicationHelper::stringURLSafe($match[1]);
+                $h2_id = OutputFilter::stringURLSafe($match[1]);
                 $new_h2 = str_replace('<h2', '<h2 id="' . $h2_id . '"', $match[0]);
-                
+
                 $doc->article->text      = str_replace($match[0], $new_h2, $doc->article->text);
                 $doc->article->fulltext  = str_replace($match[0], $new_h2, $doc->article->fulltext);
                 $doc->article->introtext = str_replace($match[0], $new_h2, $doc->article->introtext);

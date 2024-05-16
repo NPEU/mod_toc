@@ -16,4 +16,36 @@
             <tag>stable</tag>
         </tags>
     </update>
+    <update>
+        <name>NPEU: mod_toc</name>
+        <description>Joomla! mod_toc module</description>
+        <element>mod_toc</element>
+        <type>module</type>
+        <version>4.0.0</version>
+        <client>site</client>
+        <infourl title="NPEU: mod_toc">https://github.com/NPEU/mod_toc/releases/tag/v4.0.0</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/NPEU/mod_toc/archive/v4.0.0.zip</downloadurl>
+        </downloads>
+        <targetplatform name="joomla" />
+        <tags>
+            <tag>stable</tag>
+        </tags>
+    </update>
+    <update>
+        <name>NPEU: mod_toc</name>
+        <description>Joomla! mod_toc module</description>
+        <element>mod_toc</element>
+        <type>module</type>
+        <version>4.0.0</version>
+        <client>site</client>
+        <infourl title="NPEU: mod_toc">https://github.com/NPEU/mod_toc/releases/tag/v4.0.0</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/NPEU/mod_toc/archive/v4.0.0.zip</downloadurl>
+        </downloads>
+        <targetplatform name="joomla" />
+        <tags>
+            <tag>stable</tag>
+        </tags>
+    </update>
 </updates>
